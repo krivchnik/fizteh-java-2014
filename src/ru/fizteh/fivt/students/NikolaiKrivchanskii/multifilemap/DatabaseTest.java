@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ru.fizteh.fivt.storage.strings.*;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomethingIsWrongException;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.MyTable;
 
