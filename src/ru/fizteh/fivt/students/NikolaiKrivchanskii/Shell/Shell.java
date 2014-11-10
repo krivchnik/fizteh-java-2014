@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.multifilemap.MultiFileMapShellState;
-
 
 public class Shell<State> {
     private final Map<String, Commands> availableCommands;
@@ -85,26 +83,6 @@ public class Shell<State> {
         }
         forInput.close();
     }
-    
-    public void run(String[] args, Shell<MultiFileMapShellState> shell) {
-		if (args.length != 0) {
-            String arg = UtilMethods.uniteItems(Arrays.asList(args), " ");
-            String[] commands = Parser.parseFullCommand(arg);
-            try {
-                runCommand(commands, state);                  
-            } catch (SomethingIsWrongException exc) {
-                if (exc.getMessage().equals("EXIT")) {
-                    System.exit(0);
-                } else {
-                    System.err.println(exc.getMessage());
-                    System.exit(-1);
-                }
-            }
-        } else {
-            consoleWay(state);
-        }
-        System.exit(0);
-	}
     
    /* public static void notmain(String[] args) {
         ShellState state = new ShellState(System.getProperty("user.dir"));

@@ -16,7 +16,7 @@ public abstract class SomeTable implements MyTable {
     private String parentDirectory;
     private static int size;
     public static int unsavedChangesCounter;
-    protected boolean autoCommit = false; //to block JUnit functional for a filemap
+    protected boolean autoCommit = true; //to block JUnit functional for a filemap
     protected abstract void load() throws SomethingIsWrongException;
     protected abstract void save() throws SomethingIsWrongException;
     
