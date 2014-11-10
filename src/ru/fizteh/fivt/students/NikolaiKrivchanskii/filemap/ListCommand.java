@@ -1,5 +1,6 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.*;
@@ -14,10 +15,14 @@ public class ListCommand implements Commands<FileMapShellState> {
         return 0;
     }
 
-    public void implement(String[] args, FileMapShellState state)
+    public void implement(String args, FileMapShellState state)
             throws SomethingIsWrongException {
         if (state.table == null) {
             throw new SomethingIsWrongException("Table not found.");
+        }
+        ArrayList<String> parameters = Parser.parseCommandArgs(args);
+        if (parameters.size() != 0) {
+        	throw new SomethingIsWrongException("This command takes no parameters");
         }
         MyTable temp = (MyTable) state.table;
         Set<String> keySet = temp.list();
@@ -25,6 +30,7 @@ public class ListCommand implements Commands<FileMapShellState> {
             System.out.println("\n");
             return;
         }
+       
         StringBuilder sb = new StringBuilder("");
         for (String key : keySet) {
             sb.append(key);

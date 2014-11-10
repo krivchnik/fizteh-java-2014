@@ -7,5 +7,5 @@ public interface Commands<State> {
     
     int getArgumentQuantity();
     
-    void implement(String[] args, State state) throws SomethingIsWrongException;
+    abstract void implement(String args, State state) throws SomethingIsWrongException;
 }
