@@ -12,7 +12,7 @@ public abstract class SomeStorage<Key, Value> {
     protected HashSet<Key> deletedKeys;
     private String name;
     protected String parentDirectory;
-    protected boolean doAutoCommit = true;
+    protected boolean doAutoCommit = false;
     private final Lock transactionLock = new ReentrantLock(true);
     
     protected final ThreadLocal<Transactions> transaction = new ThreadLocal<Transactions>() {
