@@ -33,8 +33,8 @@ public class Database implements TableProvider {
         if (table == null) {
             throw new SomethingIsWrongException("Tablename does not exist");
         }
-        if (table.getChangesCount() > 0) {
-            throw new SomethingIsWrongException("There are " + table.getChangesCount() + " uncommited changes.");
+        if (table.getChangesCounter() > 0) {
+            throw new SomethingIsWrongException("There are " + table.getChangesCounter() + " uncommited changes.");
         }
 
         return table;

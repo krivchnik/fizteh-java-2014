@@ -8,15 +8,16 @@ import org.junit.Test;
 
 import ru.fizteh.fivt.storage.strings.*;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomethingIsWrongException;
+import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.MyTable;
 
 public class DatabaseTest {
 
-	TableProviderFactory factory;
+	DatabaseFactory factory;
     TableProvider provider;
 
     @Before
     public void beforeTest() throws SomethingIsWrongException {
-        factory = (TableProviderFactory) new DatabaseFactory();
+        factory = new DatabaseFactory();
         provider = factory.create("C:\\temp\\database_test");
         provider.createTable("table1");
         provider.createTable("table2");
@@ -45,7 +46,7 @@ public class DatabaseTest {
         Assert.assertNotNull(provider.getTable("table1"));
         Assert.assertNotNull(provider.getTable("table2"));
 
-        Table table1 = (Table) provider.getTable("table1");
+        MyTable table1 = (MyTable) provider.getTable("table1");
         Assert.assertEquals(table1, provider.getTable("table1"));
     }
 
