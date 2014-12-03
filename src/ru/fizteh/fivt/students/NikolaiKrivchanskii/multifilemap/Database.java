@@ -24,43 +24,45 @@ public class Database implements TableProvider {
         //}
     }
 
-    public MultifileTable getTable(String name) throws SomethingIsWrongException {
+    public MultifileTable getTable(String name) {
         if (name == null) {
-            throw new SomethingIsWrongException("Table's name cannot be null");
+            throw new IllegalArgumentException("Table's name cannot be null");
         }
         MultifileTable table = content.get(name);
 
         if (table == null) {
-            throw new SomethingIsWrongException("Tablename does not exist");
+            return null;
         }
         if (table.getChangesCounter() > 0) {
-            throw new SomethingIsWrongException("There are " + table.getChangesCounter() + " uncommited changes.");
+            System.out.println("There are " + table.getChangesCounter() + " uncommited changes.");
         }
 
         return table;
     }
 
-    public MultifileTable createTable(String name) throws SomethingIsWrongException {
+    public MultifileTable createTable(String name) {
         if (name == null) {
             throw new IllegalArgumentException("Table's name cannot be null");
         }
         if (content.containsKey(name)) {
-            throw new IllegalStateException("Table already exists");
+            return null;
         }
         MultifileTable table = new MultifileTable(databaseDirectoryPath, name);
         content.put(name, table);
         return table;
     }
 
-    public void removeTable(String name) throws SomethingIsWrongException {
+    public void removeTable(String name) {
         if (name == null) {
-            throw new SomethingIsWrongException("Table's name cannot be null");
+            throw new IllegalArgumentException("Table's name cannot be null");
         }
 
         if (!content.containsKey(name)) {
-            throw new SomethingIsWrongException("Table doesn't exist");
+            throw new IllegalStateException("Table doesn't exist");
         }
-
+        MultifileTable table = content.get(name);
+        table.clear();
+        table.commit();
         content.remove(name);
 
         File tableFile = new File(databaseDirectoryPath, name);

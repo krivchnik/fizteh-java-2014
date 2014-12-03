@@ -31,19 +31,12 @@ public class MultifileMapMain {
     	    }
     	    MultiFileMapShellState state = new MultiFileMapShellState();
     	    DatabaseFactory factory = new DatabaseFactory();
-    	    state.tableProvider = factory.create(dbDirectory);
+    	    state.tableProvider = (TableProvider) factory.create(dbDirectory);
     	    shell.setShellState(state);
         } catch (IllegalArgumentException e) {
     	    System.err.println("error: " + e.getMessage());
     	    System.exit(-1);
         }
         shell.run(args, shell);
-        /*Shell<MultiFileMapShellState> shell = new Shell<MultiFileMapShellState>(actualResult);
-        String dbDirectory = System.getProperty("fizteh.db.dir");
-        System.out.println(dbDirectory);
-        DatabaseFactory factory = new DatabaseFactory();
-        state.tableProvider = factory.create(dbDirectory);
-        shell.setShellState(state);
-        shell.consoleWay(state);*/
         }
 }

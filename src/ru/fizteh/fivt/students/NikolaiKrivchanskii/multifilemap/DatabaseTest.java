@@ -12,7 +12,7 @@ import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.MyTable;
 public class DatabaseTest {
 
 	DatabaseFactory factory;
-    TableProvider provider;
+    ru.fizteh.fivt.storage.strings.TableProvider provider;
 
     @Before
     public void beforeTest() throws SomethingIsWrongException {

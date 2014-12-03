@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import ru.fizteh.fivt.storage.strings.Table;
 import ru.fizteh.fivt.storage.strings.TableProvider;
 import ru.fizteh.fivt.storage.strings.TableProviderFactory;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.MyTable;
@@ -15,15 +16,15 @@ public class MultifileTableTest {
 
 	private static final int KEYS_COUNT = 20;
     private static final String TABLE_NAME = "testtable";
-    MyTable currentTable;
+    Table currentTable;
 
-    TableProviderFactory factory = (TableProviderFactory) new DatabaseFactory();
+    TableProviderFactory factory = new DatabaseFactory();
     TableProvider provider = factory.create("C:\\temp\\database_test");
     
 
     @Before
     public void gettingReady() throws Exception {
-        currentTable = (MyTable) provider.createTable(TABLE_NAME);
+        currentTable = provider.createTable(TABLE_NAME);
         for (int index = 0; index < KEYS_COUNT; ++index) {
             String key = String.format("key%d", index);
             String value = String.format("value%d", index);
@@ -34,7 +35,7 @@ public class MultifileTableTest {
     @Test
     public void testForNewData() {
         // new data
-        for (int index = 0; index < KEYS_COUNT; ++index) {
+        for (int index = 21; index < KEYS_COUNT + 21; ++index) {
             String newKey = String.format("new_key%d", index);
             String newValue = String.format("new_value%d", index);
             Assert.assertNull(currentTable.put(newKey, newValue));

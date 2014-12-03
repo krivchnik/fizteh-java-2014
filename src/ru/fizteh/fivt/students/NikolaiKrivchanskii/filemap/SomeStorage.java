@@ -146,7 +146,7 @@ public abstract class SomeStorage<Key, Value> {
     
     public Value getFromStorage(Key key) {
         if (key == null) {
-        	throw new IllegalArgumentException ("key cannot be null");
+        	throw new IllegalArgumentException("key cannot be null");
         }
         return transaction.get().getVal(key);
     }
