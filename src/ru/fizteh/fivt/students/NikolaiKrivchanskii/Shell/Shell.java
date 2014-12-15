@@ -86,8 +86,8 @@ public class Shell<State> {
         forInput.close();
     }
 
-	public void run(String[] args, Shell<MultiFileMapShellState> shell) {
-		if (args.length != 0) {
+    public void run(String[] args, Shell<MultiFileMapShellState> shell) {
+        if (args.length != 0) {
             String arg = UtilMethods.uniteItems(Arrays.asList(args), " ");
             String[] commands = Parser.parseFullCommand(arg);
             try {
@@ -104,7 +104,7 @@ public class Shell<State> {
             consoleWay(state);
         }
         System.exit(0);
-	}
+    }
     
    /* public static void notmain(String[] args) {
         ShellState state = new ShellState(System.getProperty("user.dir"));

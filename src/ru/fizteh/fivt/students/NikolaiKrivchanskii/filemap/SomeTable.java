@@ -31,7 +31,7 @@ public abstract class SomeTable implements MyTable {
     }
     
     public List<String> list() {
-    	String a = "";
+        String a = "";
         List<String> toReturnSafe = new LinkedList<String>(currentData.keySet());        
         return toReturnSafe;
     }
@@ -73,9 +73,9 @@ public abstract class SomeTable implements MyTable {
     }
     
     public String get(String key) {
-    	if (key == null) {
-    		throw new IllegalArgumentException("null table cannot exist");
-    	}
+        if (key == null) {
+            throw new IllegalArgumentException("null table cannot exist");
+        }
         if (currentData.containsKey(key)) {
             return currentData.get(key);
         } else if (deletedKeys.contains(key)) {
@@ -85,9 +85,9 @@ public abstract class SomeTable implements MyTable {
     }
     
     public String put(String key, String newValue) {
-    	if (key == null || newValue == null) {
-    		throw new IllegalArgumentException("cannot put null values");
-    	}
+        if (key == null || newValue == null) {
+            throw new IllegalArgumentException("cannot put null values");
+        }
         String value = oldValue(key);
         currentData.put(key, newValue);
         if (value == null) {
@@ -170,11 +170,11 @@ public abstract class SomeTable implements MyTable {
     }
     
     public void clear() {
-    	unchangedOldData.clear();
-    	currentData.clear();
-    	deletedKeys.clear();
-    	unsavedChangesCounter = 0;
-    	size = 0;
+        unchangedOldData.clear();
+        currentData.clear();
+        deletedKeys.clear();
+        unsavedChangesCounter = 0;
+        size = 0;
     }
     
     public int commit() {
