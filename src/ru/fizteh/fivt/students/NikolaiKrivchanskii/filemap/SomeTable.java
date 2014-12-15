@@ -2,9 +2,10 @@ package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.*;
 
-
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -29,9 +30,8 @@ public abstract class SomeTable implements MyTable {
          return autoCommit;
     }
     
-    public Set<String> list() {
-        Set<String> toReturnSafe = new HashSet<String>();
-        toReturnSafe = currentData.keySet();
+    public List<String> list() {
+        List<String> toReturnSafe = new LinkedList<String>(currentData.keySet());
         return toReturnSafe;
     }
     

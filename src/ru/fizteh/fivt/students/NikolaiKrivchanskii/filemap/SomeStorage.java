@@ -3,7 +3,8 @@ package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -85,9 +86,8 @@ public abstract class SomeStorage<Key, Value> {
     		return unchangedOldData.get(key);
     	}
     	
-    	public HashSet<Key> getKeys() {
-    		HashSet<Key> result = new HashSet<Key>();
-    		result.addAll(currentData.keySet());
+    	public List<Key> getKeys() {
+    		List<Key> result = new LinkedList<Key>(currentData.keySet());
     		return result;
     	}
     	
@@ -158,7 +158,7 @@ public abstract class SomeStorage<Key, Value> {
         return transaction.get().getVal(key);
     }
     
-    public Set<Key> getAllKeys() {
+    public List<Key> getAllKeys() {
     	return transaction.get().getKeys();
     }
     

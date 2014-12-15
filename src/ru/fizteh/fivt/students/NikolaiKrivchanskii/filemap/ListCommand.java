@@ -1,6 +1,7 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.*;
@@ -25,7 +26,7 @@ public class ListCommand implements Commands<FileMapShellState> {
         	throw new SomethingIsWrongException("This command takes no parameters");
         }
         MyTable temp = (MyTable) state.table;
-        Set<String> keySet = temp.list();
+        List<String> keySet = temp.list();
         if (keySet.size() == 0) {
             System.out.println("\n");
             return;
