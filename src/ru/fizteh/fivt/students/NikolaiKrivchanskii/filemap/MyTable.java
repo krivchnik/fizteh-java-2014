@@ -1,7 +1,7 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
 import java.util.Set;
-
+import ru.fizteh.fivt.storage.strings.Table;
 
 public interface MyTable extends Table {
     String getName();

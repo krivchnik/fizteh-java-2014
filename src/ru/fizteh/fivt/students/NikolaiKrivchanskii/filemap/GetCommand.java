@@ -1,8 +1,12 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.*;
+import java.util.ArrayList;
 
-public class GetCommand implements Commands<FileMapShellState> {
+import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomeCommand;
+import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomethingIsWrongException;
+import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.Parser;
+
+public class GetCommand<Table, Key, Value, State extends FileMapShellStateInterface<Table, Key, Value>> extends SomeCommand<State>{
 
     public String getCommandName() {
         return "get";
@@ -11,17 +15,22 @@ public class GetCommand implements Commands<FileMapShellState> {
     public int getArgumentQuantity() {
         return 1;
     }
-
-    public void implement(String[] args, FileMapShellState state)
+    
+    public void implement(String args, State state)
             throws SomethingIsWrongException {
-        if (state.table == null) {
-            throw new SomethingIsWrongException("Table not found.");
+        if (state.getTable() == null) {
+            throw new SomethingIsWrongException ("no table");
         }
-        String value = state.table.get(args[0]);
+        ArrayList<String> parameters = Parser.parseCommandArgs(args);
+        if (parameters.size() != 1) {
+            throw new IllegalArgumentException("Use 1 argument for this operation");
+        }
+        Key key = state.parseKey(parameters.get(0));
+        Value value = state.get(key);
         if (value == null) {
-            System.out.println("Not found\n");
+            System.out.println("not found");
         } else {
-            System.out.println("Found:\n" + value);
+            System.out.println("found\n" + state.valueToString(value));
         }
         
     }
