@@ -16,7 +16,7 @@ public abstract class SomeTable implements MyTable {
     private String parentDirectory;
     private static int size;
     public static int unsavedChangesCounter;
-    protected boolean autoCommit = true; //to block JUnit functional for a filemap
+    protected boolean autoCommit = false; //to block JUnit functional for a filemap
     protected abstract void load() throws SomethingIsWrongException;
     protected abstract void save() throws SomethingIsWrongException;
     
@@ -50,6 +50,10 @@ public abstract class SomeTable implements MyTable {
         return size;
     }
     
+    public int getChangesCount() {
+        return unsavedChangesCounter;
+    }
+    
     public SomeTable(String dir, String name) {
         this.parentDirectory = dir;
         this.name = name;
@@ -68,6 +72,9 @@ public abstract class SomeTable implements MyTable {
     }
     
     public String get(String key) {
+    	if (key == null) {
+    		throw new IllegalArgumentException ("null table cannot exist");
+    	}
         if (currentData.containsKey(key)) {
             return currentData.get(key);
         } else if (deletedKeys.contains(key)) {
@@ -77,6 +84,9 @@ public abstract class SomeTable implements MyTable {
     }
     
     public String put(String key, String newValue) {
+    	if (key == null || newValue == null) {
+    		throw new IllegalArgumentException("cannot put null values");
+    	}
         String value = oldValue(key);
         currentData.put(key, newValue);
         if (value == null) {
@@ -156,6 +166,14 @@ public abstract class SomeTable implements MyTable {
         size = unchangedOldData.size();
         unsavedChangesCounter = 0;
         return deletedOrAdded;
+    }
+    
+    public void clear() {
+    	unchangedOldData.clear();
+    	currentData.clear();
+    	deletedKeys.clear();
+    	unsavedChangesCounter = 0;
+    	size = 0;
     }
     
     public int commit() {
