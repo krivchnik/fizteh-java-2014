@@ -1,7 +1,7 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.List;
 
 public abstract class TableUsingStrings extends SomeStorage<String, String> implements MyTable {
 	protected TableUsingStrings(String dir, String name) {
@@ -32,7 +32,7 @@ public abstract class TableUsingStrings extends SomeStorage<String, String> impl
 		return commitStorage();
 	}
 	
-	public Set<String> list() { 
+	public List<String> list() { 
         return getAllKeys();
     }
 	
