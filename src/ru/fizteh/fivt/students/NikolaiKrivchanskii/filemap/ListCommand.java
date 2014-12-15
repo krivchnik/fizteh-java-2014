@@ -1,6 +1,6 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
-import java.util.Set;
+import java.util.List;
 
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.*;
 
@@ -20,7 +20,7 @@ public class ListCommand implements Commands<FileMapShellState> {
             throw new SomethingIsWrongException("Table not found.");
         }
         MyTable temp = (MyTable) state.table;
-        Set<String> keySet = temp.list();
+        List<String> keySet = temp.list();
         if (keySet.size() == 0) {
             System.out.println("\n");
             return;
