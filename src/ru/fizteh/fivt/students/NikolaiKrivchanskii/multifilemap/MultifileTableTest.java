@@ -10,11 +10,10 @@ import org.junit.Test;
 import ru.fizteh.fivt.storage.strings.Table;
 import ru.fizteh.fivt.storage.strings.TableProvider;
 import ru.fizteh.fivt.storage.strings.TableProviderFactory;
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.MyTable;
 
 public class MultifileTableTest {
 
-	private static final int KEYS_COUNT = 20;
+    private static final int KEYS_COUNT = 20;
     private static final String TABLE_NAME = "testtable";
     Table currentTable;
 
@@ -134,8 +133,7 @@ public class MultifileTableTest {
     }
 
     @Test
-    public void testRollbackAndCommit()
-    {
+    public void testRollbackAndCommit() {
         for (int index = 0; index < KEYS_COUNT; ++index) {
             String key = String.format("key%d", index);
             String value = String.format("value%d", index);

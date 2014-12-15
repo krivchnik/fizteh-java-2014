@@ -8,16 +8,13 @@ import java.util.Scanner;
 import java.util.Set;
 
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.multifilemap.MultiFileMapShellState;
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.Parser;
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomethingIsWrongException;
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.UtilMethods;
 
 
 public class Shell<State> {
     private final Map<String, Commands> availableCommands;
     private static final String GREETING = "$ ";
     State state;
-    
+
     
     public Shell(Set<Commands> commands) {
         Map<String, Commands> tempCommands = new HashMap<String, Commands>();

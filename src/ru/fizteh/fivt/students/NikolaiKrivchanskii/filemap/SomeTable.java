@@ -74,7 +74,7 @@ public abstract class SomeTable implements MyTable {
     
     public String get(String key) {
     	if (key == null) {
-    		throw new IllegalArgumentException ("null table cannot exist");
+    		throw new IllegalArgumentException("null table cannot exist");
     	}
         if (currentData.containsKey(key)) {
             return currentData.get(key);
