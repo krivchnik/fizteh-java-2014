@@ -1,8 +1,12 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.*;
+import java.util.ArrayList;
 
-public class PutCommand implements Commands<FileMapShellState> {
+import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomeCommand;
+import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomethingIsWrongException;
+import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.Parser;
+
+public class PutCommand<Table, Key, Value, State extends FileMapShellStateInterface<Table, Key, Value>> extends SomeCommand<State>{
 
     public String getCommandName() {
         return "put";
@@ -12,14 +16,21 @@ public class PutCommand implements Commands<FileMapShellState> {
         return 2;
     }
 
-    public void implement(String[] args, FileMapShellState state)
+    public void implement(String args, State state)
             throws SomethingIsWrongException {
-        if (state.table == null) {
-            throw new SomethingIsWrongException("No table chosen");
+    	if (state.getTable() == null) {
+    		System.err.println("no table");
+    		return;
+    	}
+    	ArrayList<String> parameters = Parser.parseCommandArgs(args);
+        if (parameters.size() != 2) {
+            throw new IllegalArgumentException("Use 2 arguments for this operation");
         }
-        String temp = state.table.put(args[0], args[1]);
+    	Key key = state.parseKey(parameters.get(0));
+    	Value value = state.parseValue(parameters.get(1));
+    	Value temp =  state.put(key, value);
         if (temp != null) {
-                System.out.println("overwrite\n" + temp);
+                System.out.println("overwrite\n" + state.valueToString(temp));
         } else {
             System.out.println("new");
         }

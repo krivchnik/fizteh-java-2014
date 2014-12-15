@@ -1,5 +1,6 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
+
 public interface Table {
     String getName();
     String get(String a);
