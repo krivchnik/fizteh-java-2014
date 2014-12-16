@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import ru.fizteh.fivt.storage.structured.ColumnFormatException;
 import ru.fizteh.fivt.storage.structured.Storeable;
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.storable.DatabaseRow;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,7 +16,7 @@ public class CommitCommand<State extends FileMapShellStateInterface> extends Som
     public void implement(String args, State state)
             throws SomethingIsWrongException {
         if (state.getTable() == null) {
-            throw new SomethingIsWrongException ("no table");
+            throw new SomethingIsWrongException("no table");
         }
         System.out.println(state.commit());
     }

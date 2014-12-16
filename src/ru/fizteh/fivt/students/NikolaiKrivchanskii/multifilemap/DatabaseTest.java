@@ -10,7 +10,7 @@ import ru.fizteh.fivt.storage.strings.*;
 
 public class DatabaseTest {
 
-	TableProviderFactory factory;
+    TableProviderFactory factory;
     TableProvider provider;
 
     @Before
@@ -82,7 +82,7 @@ public class DatabaseTest {
     
     @After
     public void testAfter() {
-    	provider.removeTable("table1");
+        provider.removeTable("table1");
         provider.removeTable("table2");
     }
 }

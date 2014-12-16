@@ -20,22 +20,22 @@ import ru.fizteh.fivt.storage.structured.Storeable;
 import ru.fizteh.fivt.storage.structured.Table;
 
 public class StorableMain {
-	public static void main(String[] args) {
-		List<Commands<?>> commands = new ArrayList<Commands<?>>();
-		HashSet<Commands<StorableShellState>> com =  new HashSet<Commands<StorableShellState>>() {{ 
-		add(new ExitCommand<StorableShellState>()); 
-		add(new RollbackCommand<StorableShellState>());
-		add(new CommitCommand<StorableShellState>()); 
+    public static void main(String[] args) {
+        List<Commands<?>> commands = new ArrayList<Commands<?>>();
+        HashSet<Commands<StorableShellState>> com =  new HashSet<Commands<StorableShellState>>() { { 
+        add(new ExitCommand<StorableShellState>()); 
+        add(new RollbackCommand<StorableShellState>());
+        add(new CommitCommand<StorableShellState>()); 
         add(new PutCommand<Table, String, Storeable, StorableShellState>()); 
         add(new GetCommand<Table, String, Storeable, StorableShellState>());
         add(new RemoveKeyCommand<Table, String, Storeable, StorableShellState>()); 
         add(new DropCommand<StorableShellState>());
         add(new UseCommand<Table, String, Storeable, StorableShellState>()); 
-        add(new CreateCommand<Table, String, Storeable, StorableShellState>());}};
+        add(new CreateCommand<Table, String, Storeable, StorableShellState>()); }};
         commands.addAll(com);
         HashSet<Commands<?>> actualResult = new HashSet<Commands<?>>(commands);
-		Shell<StorableShellState> shell = new Shell<StorableShellState>(actualResult);
-		String databaseDirectory = System.getProperty("fizteh.db.dir");
+        Shell<StorableShellState> shell = new Shell<StorableShellState>(actualResult);
+        String databaseDirectory = System.getProperty("fizteh.db.dir");
 
         if (databaseDirectory == null) {
             System.err.println("You haven't set database directory");
@@ -54,5 +54,5 @@ public class StorableMain {
             System.exit(1);
         }
         shell.run(args, shell);
-	}
+    }
 }

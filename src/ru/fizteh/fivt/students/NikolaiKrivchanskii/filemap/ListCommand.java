@@ -22,7 +22,7 @@ public class ListCommand implements Commands<FileMapShellState> {
         }
         ArrayList<String> parameters = Parser.parseCommandArgs(args);
         if (parameters.size() != 0) {
-        	throw new SomethingIsWrongException("This command takes no parameters");
+            throw new SomethingIsWrongException("This command takes no parameters");
         }
         MyTable temp = (MyTable) state.table;
         List<String> keySet = temp.list();

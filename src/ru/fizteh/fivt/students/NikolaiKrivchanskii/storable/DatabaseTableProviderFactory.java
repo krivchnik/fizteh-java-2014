@@ -9,7 +9,7 @@ import ru.fizteh.fivt.storage.structured.TableProviderFactory;
 
 public class DatabaseTableProviderFactory implements TableProviderFactory {
 
-	public synchronized TableProvider create(String directory) throws IOException {
+    public synchronized TableProvider create(String directory) throws IOException {
         if (directory == null) {
             throw new IllegalArgumentException("directory cannot be null");
         }
@@ -31,3 +31,4 @@ public class DatabaseTableProviderFactory implements TableProviderFactory {
         return new DatabaseTableProvider(databaseDirectory.getAbsolutePath());
     }
 }
+

@@ -7,7 +7,7 @@ import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.TableUsingStrings;
 
 
 public class MultifileTable extends TableUsingStrings {
-	
+    
 
 
     public MultifileTable(String directory, String tableName) {
@@ -15,21 +15,21 @@ public class MultifileTable extends TableUsingStrings {
     }  
 
     /*private File getTableDirectory() {
-		File tableDirectory = new File(getParentDirectory(), getName());
-		if (!tableDirectory.exists()) {
-	        tableDirectory.mkdir();
-	    }
-		return tableDirectory;
+        File tableDirectory = new File(getParentDirectory(), getName());
+        if (!tableDirectory.exists()) {
+            tableDirectory.mkdir();
+        }
+        return tableDirectory;
     }*/
 
-	protected void load() throws IOException {
-		MultiFileMapReadingUtils.load(new SimpleTableBuilder(this));
-		
-	}
+    protected void load() throws IOException {
+        MultiFileMapReadingUtils.load(new SimpleTableBuilder(this));
+        
+    }
 
-	protected void save() throws IOException{
-		MultiFileMapWritingUtils.save(new SimpleTableBuilder(this));
-		
-	}
+    protected void save() throws IOException {
+        MultiFileMapWritingUtils.save(new SimpleTableBuilder(this));
+        
+    }
 
 }

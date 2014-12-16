@@ -2,10 +2,12 @@ package ru.fizteh.fivt.students.NikolaiKrivchanskii.storable;
 
 
 import org.junit.*;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
 import ru.fizteh.fivt.storage.structured.Storeable;
 import ru.fizteh.fivt.storage.structured.Table;
 import ru.fizteh.fivt.storage.structured.TableProvider;
@@ -21,17 +23,17 @@ public class DatabaseTableTest {
         try {
             provider = factory.create(DATABASE);
         } catch (IOException e) {
-
+           System.out.println("Exception caught");
         }
 
         List<Class<?>> columnTypes = new ArrayList<>();
         columnTypes.add(Integer.class);
         columnTypes.add(String.class);
         try {
-			currentTable = provider.createTable("testTable", columnTypes);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+         currentTable = provider.createTable("testTable", columnTypes);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
     }
 
     @After

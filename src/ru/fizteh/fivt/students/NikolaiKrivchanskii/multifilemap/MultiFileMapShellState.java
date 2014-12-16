@@ -6,7 +6,8 @@ import java.io.IOException;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.FileMapShellState;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.MyTable;
 
-public class MultiFileMapShellState extends FileMapShellState implements MultifileMapShellStateInterface<MyTable, String, String> {
+public class MultiFileMapShellState extends FileMapShellState 
+       implements MultifileMapShellStateInterface<MyTable, String, String> {
         public MultiFileMapTableProviderClass tableProvider;
 
         public MyTable useTable(String name) {
