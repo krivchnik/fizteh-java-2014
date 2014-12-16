@@ -14,7 +14,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.GlobalUtils;
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.multifilemap.MultifileTable;
 import ru.fizteh.fivt.storage.structured.ColumnFormatException;
 import ru.fizteh.fivt.storage.structured.Storeable;
 import ru.fizteh.fivt.storage.structured.Table;

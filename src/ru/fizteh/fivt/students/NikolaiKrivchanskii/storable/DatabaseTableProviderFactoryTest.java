@@ -3,7 +3,6 @@ package ru.fizteh.fivt.students.NikolaiKrivchanskii.storable;
 import org.junit.Test;
 
 import ru.fizteh.fivt.storage.structured.TableProviderFactory;
-import ru.fizteh.fivt.students.NikolaiKrivchanskii.storable.DatabaseTableProviderFactory;
 
 import java.io.IOException;
 

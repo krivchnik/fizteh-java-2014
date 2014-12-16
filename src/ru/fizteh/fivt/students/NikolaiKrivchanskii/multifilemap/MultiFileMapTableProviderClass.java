@@ -4,6 +4,6 @@ import java.util.HashMap;
 
 import ru.fizteh.fivt.storage.strings.TableProvider;
 
-public abstract interface MultiFileMapTableProviderClass extends TableProvider {
+public interface MultiFileMapTableProviderClass extends TableProvider {
 	HashMap<String, Integer> showTables();
 }

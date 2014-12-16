@@ -2,7 +2,6 @@ package ru.fizteh.fivt.students.NikolaiKrivchanskii.multifilemap;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +10,7 @@ import ru.fizteh.fivt.storage.strings.TableProvider;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.GlobalUtils;
 
 public class Database implements TableProvider {
-	private static final String CHECK_NAME_EXPRESSION = "[^0-9A-Za-zА-Яа-я]+";
+    private static final String CHECK_NAME_EXPRESSION = "[^0-9A-Za-zА-Яа-я]+";
     HashMap<String, MultifileTable> content = new HashMap<String, MultifileTable>();
     private String databaseDirectoryPath;
     private MultifileTable currentTable = null;
@@ -19,13 +18,13 @@ public class Database implements TableProvider {
     public Database(String databaseDirectoryPath) {
         this.databaseDirectoryPath = databaseDirectoryPath;
         File databaseDirectory = new File(databaseDirectoryPath);
-        for(File tableFile : databaseDirectory.listFiles()) {
-            	if (tableFile.isFile()) {
-                	continue;
-            	}
-            	MultifileTable table = new MultifileTable(databaseDirectoryPath, tableFile.getName());
-            	content.put(table.getName(), table);
-        	}
+        for (File tableFile : databaseDirectory.listFiles()) {
+                if (tableFile.isFile()) {
+                    continue;
+                }
+                MultifileTable table = new MultifileTable(databaseDirectoryPath, tableFile.getName());
+                content.put(table.getName(), table);
+            }
     }
 
     public MultifileTable getTable(String name) {
@@ -38,11 +37,11 @@ public class Database implements TableProvider {
             return table;
         }
         if (currentTable != null) {
-        	int changes = currentTable.getChangesCounter();
+            int changes = currentTable.getChangesCounter();
             if (changes > 0 && !currentTable.getAutoCommit()) {
-        		throw new IllegalStateException(changes + " unsaved changes");
+                throw new IllegalStateException(changes + " unsaved changes");
             } else if (currentTable.getAutoCommit()) {
-        	    currentTable.commit();
+                currentTable.commit();
             }
         }
 
@@ -51,11 +50,11 @@ public class Database implements TableProvider {
     }
 
     public HashMap<String, Integer> showTables() {
-    	HashMap<String, Integer> tables = new HashMap<String, Integer>();
-    	for (Entry<String, MultifileTable> contents : content.entrySet()) {
-			tables.put(contents.getKey(), contents.getValue().size());
-		}
-		return tables;
+        HashMap<String, Integer> tables = new HashMap<String, Integer>();
+        for (Entry<String, MultifileTable> contents : content.entrySet()) {
+            tables.put(contents.getKey(), contents.getValue().size());
+        }
+        return tables;
     }
     
     public MultifileTable createTable(String name) {
@@ -68,7 +67,7 @@ public class Database implements TableProvider {
         }
         File tableDirectory = new File(databaseDirectoryPath, name);
         if (!tableDirectory.exists()) {
-        	tableDirectory.mkdir();
+            tableDirectory.mkdir();
         }
         MultifileTable table = new MultifileTable(databaseDirectoryPath, name);
         content.put(name, table);
@@ -77,15 +76,15 @@ public class Database implements TableProvider {
 
     public void removeTable(String name) {
         if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException ("Table's name cannot be null");
+            throw new IllegalArgumentException("Table's name cannot be null");
         }
         if (!content.containsKey(name)) {
             throw new IllegalStateException(name + " not exists");
         }
         if (currentTable != null) {
-        	if (currentTable.getName().equals(name)) {
-        		currentTable = null;
-        	}
+            if (currentTable.getName().equals(name)) {
+                currentTable = null;
+            }
         }
         content.remove(name);
         File tableFile = new File(databaseDirectoryPath, name);
@@ -93,10 +92,10 @@ public class Database implements TableProvider {
     }
     
     private void checkName(String name) {
-    	Pattern pattern = Pattern.compile(CHECK_NAME_EXPRESSION);
-    	Matcher matcher = pattern.matcher(name);
-    	if (matcher.find()) {
-    		throw new IllegalArgumentException("bad symbol in table's name");
-    	}
+        Pattern pattern = Pattern.compile(CHECK_NAME_EXPRESSION);
+        Matcher matcher = pattern.matcher(name);
+        if (matcher.find()) {
+            throw new IllegalArgumentException("bad symbol in table's name");
+        }
     }
 }

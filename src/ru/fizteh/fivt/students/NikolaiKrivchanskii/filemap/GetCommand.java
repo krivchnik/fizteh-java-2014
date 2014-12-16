@@ -6,7 +6,8 @@ import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomeCommand;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomethingIsWrongException;
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.Parser;
 
-public class GetCommand<Table, Key, Value, State extends FileMapShellStateInterface<Table, Key, Value>> extends SomeCommand<State>{
+public class GetCommand<Table, Key, Value, State extends FileMapShellStateInterface<Table, Key, Value>>
+       extends SomeCommand<State> {
 
     public String getCommandName() {
         return "get";
@@ -19,7 +20,7 @@ public class GetCommand<Table, Key, Value, State extends FileMapShellStateInterf
     public void implement(String args, State state)
             throws SomethingIsWrongException {
         if (state.getTable() == null) {
-            throw new SomethingIsWrongException ("no table");
+            throw new SomethingIsWrongException("no table");
         }
         ArrayList<String> parameters = Parser.parseCommandArgs(args);
         if (parameters.size() != 1) {

@@ -38,6 +38,10 @@ public class DatabaseRow implements Storeable {
         DatabaseRow otherStoreable = (DatabaseRow) obj;
         return otherStoreable.columns.equals(columns) && otherStoreable.classes.equals(classes);
     }
+	
+	public int hashCode() {
+		return classes.hashCode() + columns.hashCode() * 17;
+	}
 
     public String getStringAt(int columnIndex) throws ColumnFormatException, IndexOutOfBoundsException {
         checkBounds(columnIndex);
@@ -109,7 +113,7 @@ public class DatabaseRow implements Storeable {
             checkColumnType(columnIndex, value.getClass());
             try {
             	LocalUtils.checkValue(value, value.getClass());
-            } catch(ParseException e) {
+            } catch (ParseException e) {
             	throw new IllegalArgumentException("incorrect value: " + value.toString());
             }
         }

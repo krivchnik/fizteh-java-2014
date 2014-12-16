@@ -7,43 +7,43 @@ import java.util.Map;
 public enum StoreableTypes {
 	
 	INTEGER("int", Integer.class) {
-		public Object ParseValue(String arg) {
+		public Object parseValue(String arg) {
 			return Integer.parseInt(arg);
 		}
 	},
 	
 	LONG("long", Long.class) {
-		public Object ParseValue(String arg) {
+		public Object parseValue(String arg) {
 			return Long.parseLong(arg);
 		}
 	},
 	
 	FLOAT("float", Float.class) {
-		public Object ParseValue(String arg) {
+		public Object parseValue(String arg) {
 			return Float.parseFloat(arg);
 		}
 	},
 	
 	DOUBLE("double", Double.class) {
-		public Object ParseValue(String arg) {
+		public Object parseValue(String arg) {
 			return Double.parseDouble(arg);
 		}
 	},
 	
 	STRING("String", String.class) {
-		public Object ParseValue(String arg) {
+		public Object parseValue(String arg) {
 			return arg;
 		}
 	},
 	
 	BYTE("byte", Byte.class) {
-		public Object ParseValue(String arg) {
+		public Object parseValue(String arg) {
 			return Byte.parseByte(arg);
 		}
 	},
 	
 	BOOLEAN("boolean", Boolean.class) {
-		public Object ParseValue(String arg) {
+		public Object parseValue(String arg) {
 			return Boolean.parseBoolean(arg);
 		}
 	};
@@ -56,8 +56,8 @@ public enum StoreableTypes {
 		this.type = type;
 	}
 	
-	private static final Map<String, StoreableTypes> typesByName;
-	private static final Map<Class<?>, StoreableTypes> typesByClass;
+	private static final Map<String, StoreableTypes> TypesByName;
+	private static final Map<Class<?>, StoreableTypes> TypesByClass;
 	
 	static {
 		HashMap<String, StoreableTypes> tempByName = new HashMap<>();
@@ -66,11 +66,11 @@ public enum StoreableTypes {
 			tempByName.put(value.name, value);
 			tempByClass.put(value.type, value);
 		}
-		typesByName = Collections.unmodifiableMap(tempByName);
-		typesByClass = Collections.unmodifiableMap(tempByClass);
+		TypesByName = Collections.unmodifiableMap(tempByName);
+		TypesByClass = Collections.unmodifiableMap(tempByClass);
 	}
 	public static Class<?> getTypeByName(String name) {
-		StoreableTypes formatter = typesByName.get(name);
+		StoreableTypes formatter = TypesByName.get(name);
 		if (formatter == null) {
 			throw new IllegalArgumentException("wrong type (" + name + ')');
 		}
@@ -78,20 +78,20 @@ public enum StoreableTypes {
 	}
 	
 	public static String getSimpleName(Class<?> type) {
-		StoreableTypes formatter = typesByClass.get(type);
+		StoreableTypes formatter = TypesByClass.get(type);
 		if (formatter == null) {
 			throw new IllegalArgumentException("unknown format");
 		}
 		return formatter.name;
 	}
 	
-	public abstract Object ParseValue(String string);
+	public abstract Object parseValue(String string);
 	
 	public static Object parseByClass(String string, Class<?> type) {
-		StoreableTypes formatter = typesByClass.get(type);
+		StoreableTypes formatter = TypesByClass.get(type);
 		if (formatter == null) {
 			throw new IllegalArgumentException ("wrong type (" + type + ')');
 		}
-		return formatter.ParseValue(string);
+		return formatter.parseValue(string);
 	}
 } 
