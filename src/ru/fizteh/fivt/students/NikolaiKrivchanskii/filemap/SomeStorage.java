@@ -171,7 +171,7 @@ public abstract class SomeStorage<Key, Value> {
     }
     
     public Value removeFromStorage(Key key) {
-        if (key == null ) {
+        if (key == null) {
             throw new IllegalArgumentException("key cannot be null");
         }
         if (getFromStorage(key) == null) {

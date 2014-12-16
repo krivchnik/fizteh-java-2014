@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class Shell<State> {
     private final Map<String, Commands> availableCommands;
-    private static final String greeting = "$";
+    private static final String GREETING = "$ ";
     State state;
     
     
@@ -46,7 +46,7 @@ public class Shell<State> {
     public void consoleWay(State state) {
         Scanner forInput = new Scanner(System.in);
         while (!Thread.currentThread().isInterrupted()) {    
-            System.out.print(greeting);
+            System.out.print(GREETING);
             try {
                 String temp = forInput.nextLine();
                 String[] commands = Parser.parseFullCommand(temp);
