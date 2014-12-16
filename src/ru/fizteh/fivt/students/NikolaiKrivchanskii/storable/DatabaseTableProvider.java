@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.locks.Lock;
@@ -50,6 +51,11 @@ public class DatabaseTableProvider implements TableProvider {
 			DatabaseTable table = new DatabaseTable(this, databaseDirPath, tableFile.getName(), columnTypes);
 			tables.put(table.getName(), table);
 		}
+	}
+	
+	public List<String> getTableNames() {
+		List<String> toReturnSafe = new LinkedList<String>(tables.keySet());
+		return toReturnSafe;
 	}
 	
 	public Table getTable(String name) {

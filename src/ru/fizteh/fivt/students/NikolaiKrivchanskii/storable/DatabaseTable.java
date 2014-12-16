@@ -35,6 +35,10 @@ public class DatabaseTable extends SomeStorage<String, Storeable> implements Tab
 		}
 	}
 	
+	public int getNumberOfUncommittedChanges() {
+		return getChangesCounter();
+	}
+	
 	public Storeable get(String key) {
         return getFromStorage(key);
     }
