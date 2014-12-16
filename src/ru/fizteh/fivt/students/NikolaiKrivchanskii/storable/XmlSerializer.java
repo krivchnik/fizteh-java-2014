@@ -9,12 +9,12 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 public class XmlSerializer {
-	StringWriter strWriter = new StringWriter();
-	XMLStreamWriter writer = null;
-	
-	public XmlSerializer() throws IOException {
-		XMLOutputFactory factory = XMLOutputFactory.newInstance();
-		try {
+    StringWriter strWriter = new StringWriter();
+    XMLStreamWriter writer = null;
+    
+    public XmlSerializer() throws IOException {
+        XMLOutputFactory factory = XMLOutputFactory.newInstance();
+        try {
             writer = factory.createXMLStreamWriter(strWriter);
             writer.writeStartElement("row");
         } catch (XMLStreamException e) {

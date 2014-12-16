@@ -90,7 +90,7 @@ public enum StoreableTypes {
 	public static Object parseByClass(String string, Class<?> type) {
 		StoreableTypes formatter = TypesByClass.get(type);
 		if (formatter == null) {
-			throw new IllegalArgumentException ("wrong type (" + type + ')');
+			throw new IllegalArgumentException("wrong type (" + type + ')');
 		}
 		return formatter.parseValue(string);
 	}

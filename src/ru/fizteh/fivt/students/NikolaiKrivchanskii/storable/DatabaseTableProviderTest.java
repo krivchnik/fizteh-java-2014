@@ -20,7 +20,7 @@ public class DatabaseTableProviderTest {
         try {
             factory.create("");
         } catch (IOException e) {
-        	System.out.println("Exception caught");
+            System.out.println("Exception caught");
         }
     }
 }

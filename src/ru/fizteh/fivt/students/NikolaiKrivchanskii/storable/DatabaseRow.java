@@ -9,39 +9,39 @@ import ru.fizteh.fivt.storage.structured.ColumnFormatException;
 import ru.fizteh.fivt.storage.structured.Storeable;
 
 public class DatabaseRow implements Storeable {
-	final List<Class<?>> classes = new ArrayList<>();
-	List<Object> columns = new ArrayList<>();
-	
-	public DatabaseRow(List<Class<?>> classes) {
-		this.classes.addAll(classes);
-		for (int i = 0; i < classes.size(); ++i) {
-			columns.add(null);
-		}
-	}
-	
-	public DatabaseRow() {}
-	
-	private void checkBounds(int index) throws IndexOutOfBoundsException {
+    final List<Class<?>> classes = new ArrayList<>();
+    List<Object> columns = new ArrayList<>();
+    
+    public DatabaseRow(List<Class<?>> classes) {
+        this.classes.addAll(classes);
+        for (int i = 0; i < classes.size(); ++i) {
+            columns.add(null);
+        }
+    }
+    
+    public DatabaseRow() {}
+    
+    private void checkBounds(int index) throws IndexOutOfBoundsException {
         if (index < 0 || index >= classes.size()) {
             throw new IndexOutOfBoundsException(String.format("index out of bound: %d", index));
         }
     }
-	
-	private void checkColumnType(int columnIndex, Class<?> actualType) throws ColumnFormatException {
+    
+    private void checkColumnType(int columnIndex, Class<?> actualType) throws ColumnFormatException {
         if (!actualType.isAssignableFrom(classes.get(columnIndex))) {
             throw new ColumnFormatException(String.format("incorrect type: expected type: %s actual type: %s",
                     classes.get(columnIndex).getName(), actualType.getName()));
         }
     }
-	
-	public boolean equals(Object obj) {
+    
+    public boolean equals(Object obj) {
         DatabaseRow otherStoreable = (DatabaseRow) obj;
         return otherStoreable.columns.equals(columns) && otherStoreable.classes.equals(classes);
     }
-	
-	public int hashCode() {
-		return classes.hashCode() + columns.hashCode() * 17;
-	}
+    
+    public int hashCode() {
+        return classes.hashCode() + columns.hashCode() * 17;
+    }
 
     public String getStringAt(int columnIndex) throws ColumnFormatException, IndexOutOfBoundsException {
         checkBounds(columnIndex);
@@ -89,13 +89,13 @@ public class DatabaseRow implements Storeable {
         checkColumnType(columnIndex, Boolean.class);
         return (Boolean) columns.get(columnIndex);
     }
-	
+    
     @Override
-	public String toString() {
+    public String toString() {
         return LocalUtils.join(columns);
     }
-	
-	public void setColumns(List<?> values) throws ColumnFormatException, IndexOutOfBoundsException {
+    
+    public void setColumns(List<?> values) throws ColumnFormatException, IndexOutOfBoundsException {
         if (values.size() != classes.size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -106,24 +106,24 @@ public class DatabaseRow implements Storeable {
             columns.add(values.get(index));
         }
     }
-	
-	public void setColumnAt(int columnIndex, Object value) throws ColumnFormatException, IndexOutOfBoundsException {
+    
+    public void setColumnAt(int columnIndex, Object value) throws ColumnFormatException, IndexOutOfBoundsException {
         checkBounds(columnIndex);
         if (value != null) {
             checkColumnType(columnIndex, value.getClass());
             try {
-            	LocalUtils.checkValue(value, value.getClass());
+                LocalUtils.checkValue(value, value.getClass());
             } catch (ParseException e) {
-            	throw new IllegalArgumentException("incorrect value: " + value.toString());
+                throw new IllegalArgumentException("incorrect value: " + value.toString());
             }
         }
         columns.set(columnIndex, value);
     }
-	
-	public void addColumn(Class<?> columnType) {
+    
+    public void addColumn(Class<?> columnType) {
         classes.add(columnType);
         columns.add(null);
     }
-	
-	
+    
+    
 }

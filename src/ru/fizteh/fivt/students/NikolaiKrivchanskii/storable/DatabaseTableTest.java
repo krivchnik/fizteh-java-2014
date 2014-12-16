@@ -23,17 +23,17 @@ public class DatabaseTableTest {
         try {
             provider = factory.create(DATABASE);
         } catch (IOException e) {
-        	System.out.println("Exception caught");
+           System.out.println("Exception caught");
         }
 
         List<Class<?>> columnTypes = new ArrayList<>();
         columnTypes.add(Integer.class);
         columnTypes.add(String.class);
         try {
-			currentTable = provider.createTable("testTable", columnTypes);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+         currentTable = provider.createTable("testTable", columnTypes);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
     }
 
     @After

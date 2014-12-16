@@ -10,13 +10,13 @@ import ru.fizteh.fivt.storage.structured.ColumnFormatException;
 import ru.fizteh.fivt.storage.structured.Table;
 
 public class LocalUtils {
-	public static List<Object> parseValues(List<String> valuesRepresentation, Table table) 
-			throws ColumnFormatException {
+    public static List<Object> parseValues(List<String> valuesRepresentation, Table table) 
+            throws ColumnFormatException {
         List<Object> values = new ArrayList<>(valuesRepresentation.size() - 1);
 
         for (int index = 1; index < valuesRepresentation.size(); ++index) {
             Object value = StoreableTypes.parseByClass(valuesRepresentation.get(index),
-            		table.getColumnType(index - 1));
+                    table.getColumnType(index - 1));
             values.add(value);
         }
         return values;
@@ -78,12 +78,12 @@ public class LocalUtils {
                     throw new ParseException("value cannot be null", 0);*/   
                 break;
             default:
-            	break;
+                break;
         }
     }
 
     public static boolean checkStringCorrect(String string) {
-    	
+        
         return (string.matches("\\s*") || string.split("\\s+").length != 1);
     }
 
