@@ -39,6 +39,10 @@ public class DatabaseTable extends SomeStorage<String, Storeable> implements Tab
 		return getChangesCounter();
 	}
 	
+	public List<String> list() {
+		return getAllKeys();
+	}
+	
 	public Storeable get(String key) {
         return getFromStorage(key);
     }
