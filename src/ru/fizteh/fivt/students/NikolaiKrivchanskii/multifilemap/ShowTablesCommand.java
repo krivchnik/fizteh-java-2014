@@ -17,7 +17,7 @@ public class ShowTablesCommand implements Commands<MultiFileMapShellState> {
     }
     
     public void implement(String[] args, MultiFileMapShellState state) throws SomethingIsWrongException {
-        if (args[0].equals("tables")) {
+        if (!args[0].equals("tables")) {
             throw new SomethingIsWrongException("no command with this name");
         }
         HashMap<String, Integer> tables = state.tableProvider.showTables();

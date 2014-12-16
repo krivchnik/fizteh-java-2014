@@ -137,7 +137,7 @@ public abstract class SomeStorage<Key, Value> {
         try {
             load();
         } catch (IOException e) {
-            if (e.getMessage().equals("didn't exist") && e.getMessage().equals("empty file")) {
+            if (!e.getMessage().equals("didn't exist") && !e.getMessage().equals("empty file")) {
                 throw new IllegalArgumentException("invalid file format " + e.getMessage());
             }
         }
