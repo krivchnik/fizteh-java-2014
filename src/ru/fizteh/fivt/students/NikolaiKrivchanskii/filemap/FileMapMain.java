@@ -14,8 +14,8 @@ public class FileMapMain {
             add(new PutCommand()); add(new GetCommand()); add(new RemoveKeyCommand());
             add(new ListCommand()); }};
         Shell<FileMapShellState> shell = new Shell<FileMapShellState>(com);
-        String dbDirectory = System.getProperty("fizteh.db.dir");
-        state.table = new SingleFileTable(dbDirectory, "master");
+        String dbFile = System.getProperty("db.file");
+        state.table = new SingleFileTable(dbFile, "master");
         shell.setShellState(state);
         shell.consoleWay(state);
     }

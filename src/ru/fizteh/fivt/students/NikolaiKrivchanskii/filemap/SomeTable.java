@@ -2,7 +2,7 @@ package ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap;
 
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.*;
 
-
+import java.io.File;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -51,7 +51,8 @@ public abstract class SomeTable implements MyTable {
     }
     
     public SomeTable(String dir, String name) {
-        this.parentDirectory = dir;
+    	File f = new File(dir);
+        this.parentDirectory = f.getParentFile().getAbsolutePath();
         this.name = name;
         unchangedOldData = new HashMap<String, String>();
         currentData = new HashMap<String, String>();

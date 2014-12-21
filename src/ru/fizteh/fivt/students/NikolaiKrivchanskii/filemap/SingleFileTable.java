@@ -9,10 +9,12 @@ import ru.fizteh.fivt.students.NikolaiKrivchanskii.Shell.SomethingIsWrongExcepti
 
 public class SingleFileTable extends SomeTable {
     
-    public static final String DATABASENAME = "1.new";
+    public static String DATABASENAME;
 
     public SingleFileTable(String dir, String name) {
         super(dir, name);
+        File f = new File(dir);  
+        DATABASENAME =  f.getName();
     }
     
     protected void load() throws SomethingIsWrongException {
