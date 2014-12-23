@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import ru.fizteh.fivt.students.NikolaiKrivchanskii.filemap.GlobalUtils;
 import ru.fizteh.fivt.storage.structured.ColumnFormatException;
@@ -54,8 +55,13 @@ public class DatabaseTableProvider implements TableProvider {
    }
    
    public List<String> getTableNames() {
-      List<String> toReturnSafe = new LinkedList<String>(tables.keySet());
-      return toReturnSafe;
+	  try {
+	      tableLock.lock();
+	      List<String> toReturnSafe = new LinkedList<String>(tables.keySet());
+          return toReturnSafe;
+	  } finally {
+		  tableLock.unlock();
+	  }
    }
    
    public Table getTable(String name) {
@@ -81,7 +87,6 @@ public class DatabaseTableProvider implements TableProvider {
    
    public Table createTable(String name, List<Class<?>> columnTypes) throws IOException {
       try {
-         tableLock.lock();
          if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("table's name cannot be null");
          }
@@ -94,6 +99,7 @@ public class DatabaseTableProvider implements TableProvider {
                 return null;
             }
          DatabaseTable table = new DatabaseTable(this, databaseDirPath, name, columnTypes);
+         tableLock.lock();
          tables.put(name, table);
          return table;
       } finally {
@@ -125,11 +131,16 @@ public class DatabaseTableProvider implements TableProvider {
    }
    
    public HashMap<String, Integer> showTables() {
-      HashMap<String, Integer> content = new HashMap<String, Integer>();
-       for (Entry<String, DatabaseTable> contents : tables.entrySet()) {
-         content.put(contents.getKey(), contents.getValue().size());
-      }
-      return content;
+	  try {
+	      tableLock.lock();
+          HashMap<String, Integer> content = new HashMap<String, Integer>();
+          for (Entry<String, DatabaseTable> contents : tables.entrySet()) {
+             content.put(contents.getKey(), contents.getValue().size());
+          }
+          return content;
+	  } finally {
+		  tableLock.unlock();
+	  }
    }
    
    public String serialize(Table table, Storeable value) throws ColumnFormatException {

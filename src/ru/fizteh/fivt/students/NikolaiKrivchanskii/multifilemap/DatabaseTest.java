@@ -1,6 +1,8 @@
 package ru.fizteh.fivt.students.NikolaiKrivchanskii.multifilemap;
 
 
+import java.io.File;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -84,5 +86,7 @@ public class DatabaseTest {
     public void testAfter() {
         provider.removeTable("table1");
         provider.removeTable("table2");
+        File f = new File("C:\\temp\\database_test");
+        f.delete();
     }
 }
